@@ -42,6 +42,12 @@ export function SiteFooter() {
           Locations
         </Link>
       </div>
+      <div className="mx-auto max-w-[1400px] border-t border-background/15 px-4 py-4 font-mono text-[11px] tracking-[0.14em] text-background/60 uppercase md:px-8">
+        Powered by{" "}
+        <a href="https://studio-21.co" target="_blank" rel="noopener" className="text-background underline-offset-4 hover:underline">
+          Studio 21
+        </a>
+      </div>
     </footer>
   );
 }
