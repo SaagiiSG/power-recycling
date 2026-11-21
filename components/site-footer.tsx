@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { Year } from "@/components/year";
-import { hours, tel, yards } from "@/lib/yards";
+import { hours, region, tel, yards } from "@/lib/yards";
 
 export function SiteFooter() {
   return (
@@ -20,7 +20,7 @@ export function SiteFooter() {
           <address key={y.id} className="text-sm not-italic">
             <p className="font-heading text-lg tracking-wide uppercase">{y.city}</p>
             <p className="mt-2 text-background/75">{y.street}</p>
-            <p className="text-background/75">{y.region}</p>
+            <p className="text-background/75">{region(y)}</p>
             <p className="mt-3 flex flex-wrap gap-x-3">
               {y.phones.map((p) => (
                 <a key={p} href={tel(p)} className="underline-offset-4 hover:underline">
