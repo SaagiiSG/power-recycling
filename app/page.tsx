@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowUpRightIcon } from "lucide-react";
 import { PartRequestForm } from "@/components/part-request-form";
 import { Button } from "@/components/ui/button";
-import { directions, hours, tel, yards } from "@/lib/yards";
+import { structuredData } from "@/lib/site";
+import { directions, hours, region, tel, yards } from "@/lib/yards";
 import yardPhoto from "@/public/photos/yard.jpg";
 import racksPhoto from "@/public/photos/racks.jpg";
 import alternatorPhoto from "@/public/photos/alternator.jpg";
@@ -22,6 +23,8 @@ const covered = [
 export default function Home() {
   return (
     <>
+      {/* Our own data, but escape "<" so nothing in it can close the script tag. */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()).replace(/</g, "\\u003c") }} />
       <section className="grid md:grid-cols-12 md:border-b">
         {/* Full-bleed photo; the text column lines up with the 1400px container below. */}
         <div className="flex flex-col justify-center px-4 py-12 md:col-span-5 md:py-20 md:pr-10 md:pl-[max(2rem,calc((100vw_-_1400px)/2_+_2rem))]">
@@ -68,7 +71,7 @@ export default function Home() {
               <address className="mt-3 text-sm leading-relaxed not-italic text-muted-foreground">
                 {y.street}
                 <br />
-                {y.region}
+                {region(y)}
               </address>
               {/* min-h keeps the buttons level when a yard has one phone number */}
               <div className="mt-5 flex flex-col gap-1 md:min-h-[4.25rem]">

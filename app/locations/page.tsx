@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { ArrowUpRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { directions, hours, tel, yards } from "@/lib/yards";
+import { directions, hours, region, tel, yards } from "@/lib/yards";
 
-export const metadata: Metadata = { title: "Locations · Power Recycling" };
+export const metadata: Metadata = {
+  title: "Locations",
+  description: `Addresses, phone numbers and maps for the ${yards.length} Power Recycling yards: ${yards.map((y) => y.city).join(", ")}.`,
+  alternates: { canonical: "/locations" },
+};
 
 const label = "font-mono text-[11px] tracking-[0.16em] uppercase text-muted-foreground";
 
@@ -24,7 +28,7 @@ export default function Locations() {
               <address className="mt-3 leading-relaxed not-italic text-muted-foreground">
                 {y.street}
                 <br />
-                {y.region}
+                {region(y)}
               </address>
               <div className="mt-5 flex flex-col gap-1">
                 {y.phones.map((p) => (

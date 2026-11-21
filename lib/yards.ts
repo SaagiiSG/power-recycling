@@ -5,7 +5,8 @@ export type Yard = {
   id: "calgary" | "regina" | "fort-macleod";
   city: string;
   street: string;
-  region: string;
+  province: "AB" | "SK";
+  postal: string;
   phones: string[];
   email: string;
   inventory: { search: string; multi: string; image: string };
@@ -23,7 +24,8 @@ export const yards: Yard[] = [
     id: "calgary",
     city: "Calgary",
     street: "2807 Ogden Road SE",
-    region: "Calgary, AB T2G 4R4",
+    province: "AB",
+    postal: "T2G 4R4",
     phones: ["403-402-8095", "403-479-2140"],
     email: "power.recycling1959755@gmail.com",
     inventory: inventory("http://www.powerrecycling195.com"),
@@ -33,7 +35,8 @@ export const yards: Yard[] = [
     id: "regina",
     city: "Regina",
     street: "3140 Pasqua St N",
-    region: "Regina, SK S0G 5K0",
+    province: "SK",
+    postal: "S0G 5K0",
     phones: ["306-543-3300"],
     email: "regina@powerrecycling.ca",
     inventory: inventory("http://search8939.used-auto-parts.biz"),
@@ -43,7 +46,8 @@ export const yards: Yard[] = [
     id: "fort-macleod",
     city: "Fort Macleod",
     street: "1007 Sgt Wilde Rd",
-    region: "Fort Macleod, AB T0L 0Z0",
+    province: "AB",
+    postal: "T0L 0Z0",
     phones: ["403-795-8572", "403-466-2681"],
     email: "parfm.2022@gmail.com",
     inventory: inventory("http://search2860.used-auto-parts.biz"),
@@ -53,7 +57,9 @@ export const yards: Yard[] = [
 
 export const hours = { label: "Business hours (MST/MDT)", weekdays: "Mon–Fri 8:00am–5:30pm", weekends: "Weekends closed" };
 
+export const region = (y: Yard) => `${y.city}, ${y.province} ${y.postal}`;
+
 export const tel = (phone: string) => `tel:+1${phone.replaceAll("-", "")}`;
 
 export const directions = (y: Yard) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Power Recycling, ${y.street}, ${y.region}`)}`;
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Power Recycling, ${y.street}, ${region(y)}`)}`;
